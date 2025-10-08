@@ -157,9 +157,7 @@ function continueToDashboard() {
   if (selectedRole.value && selectedBranch.value) {
     localStorage.setItem("selectedRole", selectedRole.value);
     localStorage.setItem("selectedBranch", selectedBranch.value);
-    setTimeout(() => {
       navigateTo("/afterChooseBranch");
-    }, 1500);
   }
 }
 
