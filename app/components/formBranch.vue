@@ -81,6 +81,6 @@ onMounted(() => {
 });
 
 function goToDashboard() {
-  navigateTo("/dashboard");
+  navigateTo("/products");
 }
 </script>
