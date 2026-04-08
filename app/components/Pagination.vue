@@ -5,7 +5,8 @@
       :disabled="currentPage === 1"
       @click="$emit('update:currentPage', currentPage - 1)"
     >
-      &lt;
+      <!-- &lt; -->
+      {{ $t("pagination.previous") }}
     </button>
 
     <button
@@ -22,14 +23,17 @@
       {{ page }}
     </button>
 
-    <span v-if="showEllipsis" class="px-2 text-[#2563eb]">...</span>
+    <span v-if="showEllipsis" class="px-2 text-[#2563eb]">{{
+      $t("pagination.more")
+    }}</span>
 
     <button
       class="border border-[#BEDBFF] rounded px-3 py-2 bg-[#f6faff] hover:bg-[#eaf2fd] disabled:opacity-50"
       :disabled="currentPage === totalPages"
       @click="$emit('update:currentPage', currentPage + 1)"
     >
-      &gt;
+      <!-- &gt; -->
+      {{ $t("pagination.next") }}
     </button>
   </div>
 </template>

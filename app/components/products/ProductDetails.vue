@@ -12,11 +12,11 @@
       >
         <UIcon name="i-heroicons-x-mark" class="w-6 h-6" />
       </button>
-      <h2 class="text-2xl font-bold mb-6 text-[#1C398E]">Product Details</h2>
+      <h2 class="text-2xl font-bold mb-6 text-[#1C398E]">{{ $t('productDetails') }}</h2>
       <div class="grid grid-cols-2 gap-4 mb-4">
         <div>
           <div class="text-sm font-semibold text-blue-700 mb-1">
-            Product Name
+            {{ $t('productName') }}
           </div>
           <div class="bg-blue-50 text-blue-900 rounded px-3 py-2">
             {{ product.name }}
@@ -24,31 +24,31 @@
         </div>
 
         <div>
-          <div class="text-sm font-semibold text-blue-700 mb-1">Category</div>
+          <div class="text-sm font-semibold text-blue-700 mb-1">{{ $t('category') }}</div>
           <div class="bg-blue-50 text-blue-900 rounded px-3 py-2">
             {{ product.category }}
           </div>
         </div>
 
         <div>
-          <div class="text-sm font-semibold text-blue-700 mb-1">SKU</div>
+          <div class="text-sm font-semibold text-blue-700 mb-1">{{ $t('sku') }}</div>
           <div class="bg-blue-50 text-blue-900 rounded px-3 py-2">
             SKU-{{ product.id }}
           </div>
         </div>
 
         <div>
-          <div class="text-sm font-semibold text-blue-700 mb-1">Status</div>
+          <div class="text-sm font-semibold text-blue-700 mb-1">{{ $t('status') }}</div>
           <div class="bg-blue-50 text-blue-900 rounded px-3 py-2">
             <span
               v-if="(product.stock ?? 20) > 0"
               class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold"
-              >Active</span
+              >{{ $t('active') }}</span
             >
             <span
               v-else
               class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold"
-              >Out of Stock</span
+              >{{ $t('outOfStock') }}</span
             >
           </div>
         </div>
@@ -99,7 +99,7 @@
           class="w-full border border-[#BEDBFF] rounded-lg py-2 text-[#2563eb] font-semibold"
           @click="$emit('close')"
         >
-          Close
+          {{ $t('close') }}
         </button>
 
         <button
@@ -114,7 +114,7 @@
           "
         >
           <UIcon name="i-heroicons-pencil" class="w-5 h-5" />
-          Edit Product
+          {{ $t('editProduct') }}
         </button>
       </div>
     </div>

@@ -10,7 +10,7 @@
         <input
           v-model="store.search"
           type="text"
-          placeholder="Search by product name, SKU..."
+          :placeholder="$t('searchPlaceholder')"
           class="pl-10 pr-2 py-2 border border-[#BEDBFF] rounded w-full bg-white focus:outline-none text-sm text-gray-500"
         />
       </div>
@@ -18,17 +18,17 @@
         v-model="store.selectedStatus"
         class="border border-[#BEDBFF] px-3 py-2 rounded text-sm text-gray-500 bg-white focus:outline-none min-w-[160px]"
       >
-        <option value="">All Status</option>
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
-        <option value="out_of_stock">Out of Stock</option>
+        <option value="">{{ $t('allStatus') }}</option>
+        <option value="active">{{ $t('active') }}</option>
+        <option value="inactive">{{ $t('inactive') }}</option>
+        <option value="out_of_stock">{{ $t('outOfStock') }}</option>
       </select>
 
       <select
         v-model="store.selectedCategory"
         class="border border-[#BEDBFF] px-3 py-2 rounded text-sm text-gray-500 bg-white focus:outline-none min-w-[160px]"
       >
-        <option value="">All Categories</option>
+        <option value="">{{ $t('allCategories') }}</option>
         <option v-for="cat in store.categories" :key="cat" :value="cat">
           {{ cat }}
         </option>
@@ -44,7 +44,7 @@
           })
         "
       >
-        + Add Product
+         + {{ $t('addProduct') }}
       </button>
     </div>
 
@@ -53,13 +53,13 @@
       <table class="min-w-full text-sm text-left">
         <thead class="bg-[#eaf2fd] text-[#2563eb] font-semibold">
           <tr>
-            <th class="px-4 py-3">SKU</th>
-            <th class="px-4 py-3">Product Name</th>
-            <th class="px-4 py-3">Category</th>
-            <th class="px-4 py-3">Price (SAR)</th>
-            <th class="px-4 py-3">Stock</th>
-            <th class="px-4 py-3">Status</th>
-            <th class="px-4 py-3">Actions</th>
+            <th class="px-4 py-3">{{ $t('sku') }}</th>
+            <th class="px-4 py-3">{{ $t('productName') }}</th>
+            <th class="px-4 py-3">{{ $t('category') }}</th>
+            <th class="px-4 py-3">{{ $t('price') }}</th>
+            <th class="px-4 py-3">{{ $t('stock') }}</th>
+            <th class="px-4 py-3">{{ $t('status') }}</th>
+            <th class="px-4 py-3">{{ $t('actions') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -93,23 +93,23 @@
               <span
                 v-if="product.stock <= 0"
                 class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold"
-                >Out of Stock</span
+                > {{ $t('outOfStock') }}</span
               >
               <span
                 v-else-if="product.status === 'active'"
                 class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold"
-                >Active</span
+                >{{ $t('active') }}</span
               >
               <span
                 v-else
                 class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold"
-                >Inactive</span
+                > {{ $t('inactive') }}</span
               >
             </td>
             <td class="px-4 py-2 flex gap-2">
               <button
                 type="button"
-                title="View"
+                title="$t('view')"
                 class="text-[#2563eb] hover:bg-[#eaf2fd] p-1 rounded"
                 @click="openDetails(product)"
               >
@@ -118,7 +118,7 @@
 
               <button
                 type="button"
-                title="Edit"
+                title="$t('edit')"
                 class="text-[#2563eb] hover:bg-[#eaf2fd] p-1 rounded"
                 @click="
                   router.push({
@@ -132,7 +132,7 @@
 
               <button
                 type="button"
-                title="Delete"
+                title="$t('delete')"
                 class="text-red-500 hover:bg-red-50 p-1 rounded"
                 @click="openDelete(product)"
               >
@@ -148,8 +148,8 @@
       >
         <!-- Showing count -->
         <div class="mb-2 sm:mb-0">
-          Showing {{ paginatedProducts.length }} of
-          {{ store.filteredProducts.length }} products
+           {{ $t('showing') }} {{ paginatedProducts.length }} {{ $t('of') }}
+          {{ store.filteredProducts.length }} {{ $t('products') }}
         </div>
         <Pagination
           v-model:currentPage="currentPage"
@@ -163,11 +163,11 @@
               name="i-heroicons-currency-dollar"
               class="inline w-4 h-4 mr-1"
             />
-            Total Value: SAR {{ totalValue.toFixed(2) }}
+            {{ $t('totalValue') }}: {{ $t('sar') }} {{ totalValue.toFixed(2) }}
           </div>
           <div>
             <UIcon name="i-heroicons-cube" class="inline w-4 h-4 mr-1" />
-            Total Stock: {{ totalStock }} units
+            {{ $t('totalStock') }}: {{ totalStock }} {{ $t('units') }}
           </div>
         </div>
       </div>

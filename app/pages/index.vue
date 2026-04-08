@@ -1,5 +1,5 @@
 <template class="h-screen">
-  <div class="flex w-screen h-screen">
+  <div class="flex w-screen h-screen dark:bg-gray-900 dark:text-white">
     <section
       class="w-full lg:w-1/2 h-full bg-white px-8 flex items-center justify-center"
     >

@@ -16,7 +16,7 @@
           name="ID"
           :ui="{
             label: 'text-black text-sm',
-            wrapper: 'w-full', 
+            wrapper: 'w-full',
           }"
         >
           <input

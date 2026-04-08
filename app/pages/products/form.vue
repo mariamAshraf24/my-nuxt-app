@@ -3,9 +3,11 @@
     <!-- Navbar -->
     <nav class="bg-white shadow px-6 py-4 flex justify-between items-center">
       <h1 class="text-xl font-bold text-[#2563eb]">
-        {{ isEdit ? "Edit Product" : "Add New Product" }}
+        {{ isEdit ? $t("productForm.editTitle") : $t("productForm.addTitle") }}
       </h1>
-      <UButton @click="goBack" color="neutral" variant="soft">← Back</UButton>
+      <UButton @click="goBack" color="neutral" variant="soft"
+        >← {{ $t("productForm.back") }}</UButton
+      >
     </nav>
 
     <!-- Form Section -->
@@ -14,7 +16,9 @@
         <form @submit="onSubmit" class="space-y-6">
           <!-- Product Name -->
           <div>
-            <label class="text-sm font-semibold text-blue-700 mb-1 block">Product Name</label>
+            <label class="text-sm font-semibold text-blue-700 mb-1 block">
+              {{ $t("productForm.nameLabel") }}</label
+            >
             <Field
               name="name"
               v-slot="{ field, errorMessage, meta }"
@@ -23,11 +27,17 @@
               <input
                 v-bind="field"
                 type="text"
-                placeholder="Enter product name"
+                :placeholder="$t('productForm.namePlaceholder')"
                 class="w-full border border-gray-300 text-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                :class="{ 'border-red-500': errorMessage &&  (meta.dirty || meta.touched) }"
+                :class="{
+                  'border-red-500':
+                    errorMessage && (meta.dirty || meta.touched),
+                }"
               />
-              <p v-if="errorMessage && (meta.dirty || meta.touched)" class="text-red-500 text-sm mt-1">
+              <p
+                v-if="errorMessage && (meta.dirty || meta.touched)"
+                class="text-red-500 text-sm mt-1"
+              >
                 {{ errorMessage }}
               </p>
             </Field>
@@ -36,7 +46,9 @@
           <!-- Category + Price -->
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="text-sm font-semibold text-blue-700 mb-1 block">Category</label>
+              <label class="text-sm font-semibold text-blue-700 mb-1 block">
+                {{ $t("productForm.categoryLabel") }}</label
+              >
               <Field
                 name="category"
                 v-slot="{ field, errorMessage, meta }"
@@ -45,9 +57,14 @@
                 <select
                   v-bind="field"
                   class="w-full border border-gray-300 text-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                  :class="{ 'border-red-500': errorMessage &&  (meta.dirty || meta.touched) }"
+                  :class="{
+                    'border-red-500':
+                      errorMessage && (meta.dirty || meta.touched),
+                  }"
                 >
-                  <option value="" disabled>Select category</option>
+                  <option value="" disabled>
+                    {{ $t("productForm.selectCategory") }}
+                  </option>
                   <option
                     v-for="cat in store.categories"
                     :key="cat"
@@ -56,14 +73,19 @@
                     {{ cat }}
                   </option>
                 </select>
-                <p v-if="errorMessage &&  (meta.dirty || meta.touched)" class="text-red-500 text-sm mt-1">
+                <p
+                  v-if="errorMessage && (meta.dirty || meta.touched)"
+                  class="text-red-500 text-sm mt-1"
+                >
                   {{ errorMessage }}
                 </p>
               </Field>
             </div>
 
             <div>
-              <label class="text-sm font-semibold text-blue-700 mb-1 block">Price</label>
+              <label class="text-sm font-semibold text-blue-700 mb-1 block">{{
+                $t("productForm.priceLabel")
+              }}</label>
               <Field
                 name="price"
                 v-slot="{ field, errorMessage, meta }"
@@ -74,11 +96,17 @@
                   type="number"
                   step="0.01"
                   min="0"
-                  placeholder="Enter price"
+                  :placeholder="$t('productForm.pricePlaceholder')"
                   class="w-full border border-gray-300 text-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                  :class="{ 'border-red-500': errorMessage && (meta.dirty || meta.touched) }"
+                  :class="{
+                    'border-red-500':
+                      errorMessage && (meta.dirty || meta.touched),
+                  }"
                 />
-                <p v-if="errorMessage &&  (meta.dirty || meta.touched)" class="text-red-500 text-sm mt-1">
+                <p
+                  v-if="errorMessage && (meta.dirty || meta.touched)"
+                  class="text-red-500 text-sm mt-1"
+                >
                   {{ errorMessage }}
                 </p>
               </Field>
@@ -88,7 +116,9 @@
           <!-- Stock + Status -->
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="text-sm font-semibold text-blue-700 mb-1 block">Stock Quantity</label>
+              <label class="text-sm font-semibold text-blue-700 mb-1 block">{{
+                $t("productForm.stockLabel")
+              }}</label>
               <Field
                 name="stock"
                 v-slot="{ field, errorMessage, meta }"
@@ -98,18 +128,26 @@
                   v-bind="field"
                   type="number"
                   min="0"
-                  placeholder="Enter stock"
+                  :placeholder="$t('productForm.stockPlaceholder')"
                   class="w-full border border-gray-300 text-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                  :class="{ 'border-red-500': errorMessage &&  (meta.dirty || meta.touched) }"
+                  :class="{
+                    'border-red-500':
+                      errorMessage && (meta.dirty || meta.touched),
+                  }"
                 />
-                <p v-if="errorMessage && (meta.dirty || meta.touched)" class="text-red-500 text-sm mt-1">
+                <p
+                  v-if="errorMessage && (meta.dirty || meta.touched)"
+                  class="text-red-500 text-sm mt-1"
+                >
                   {{ errorMessage }}
                 </p>
               </Field>
             </div>
 
             <div>
-              <label class="text-sm font-semibold text-blue-700 mb-1 block">Status</label>
+              <label class="text-sm font-semibold text-blue-700 mb-1 block">
+                {{ $t("productForm.statusLabel") }}</label
+              >
               <Field
                 name="status"
                 v-slot="{ field, errorMessage, meta }"
@@ -118,13 +156,23 @@
                 <select
                   v-bind="field"
                   class="w-full border border-gray-300 text-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                  :class="{ 'border-red-500': errorMessage &&  (meta.dirty || meta.touched) }"
+                  :class="{
+                    'border-red-500':
+                      errorMessage && (meta.dirty || meta.touched),
+                  }"
                 >
-                  <option value="" disabled>Select status</option>
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
+                  <option value="" disabled>
+                    {{ $t("productForm.selectStatus") }}
+                  </option>
+                  <option value="active">{{ $t("productForm.active") }}</option>
+                  <option value="inactive">
+                    {{ $t("productForm.inactive") }}
+                  </option>
                 </select>
-                <p v-if="errorMessage &&  (meta.dirty || meta.touched)" class="text-red-500 text-sm mt-1">
+                <p
+                  v-if="errorMessage && (meta.dirty || meta.touched)"
+                  class="text-red-500 text-sm mt-1"
+                >
                   {{ errorMessage }}
                 </p>
               </Field>
@@ -133,7 +181,9 @@
 
           <!-- Description -->
           <div>
-            <label class="text-sm font-semibold text-blue-700 mb-1 block">Description</label>
+            <label class="text-sm font-semibold text-blue-700 mb-1 block">
+              {{ $t("productForm.descriptionLabel") }}</label
+            >
             <Field
               name="description"
               v-slot="{ field, errorMessage, meta }"
@@ -142,11 +192,14 @@
               <textarea
                 v-bind="field"
                 rows="4"
-                placeholder="Enter product description"
+                :placeholder="$t('productForm.descriptionPlaceholder')"
                 class="w-full border border-gray-300 text-gray-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
                 :class="{ 'border-red-500': errorMessage && meta.dirty }"
               ></textarea>
-              <p v-if="errorMessage && meta.dirty" class="text-red-500 text-sm mt-1">
+              <p
+                v-if="errorMessage && meta.dirty"
+                class="text-red-500 text-sm mt-1"
+              >
                 {{ errorMessage }}
               </p>
             </Field>
@@ -165,7 +218,11 @@
               type="submit"
               class="bg-[#2563eb] rounded-lg py-2 px-6 text-white font-semibold"
             >
-              {{ isEdit ? "Save Changes" : "Add Product" }}
+              {{
+                isEdit
+                  ? $t("productForm.saveChanges")
+                  : $t("productForm.addProduct")
+              }}
             </button>
           </div>
         </form>
@@ -188,7 +245,7 @@ const store = useProductStore();
 const isEdit = computed(() => !!route.query.id);
 
 const { handleSubmit, setValues } = useForm({
-  validationSchema: toTypedSchema(productSchema), 
+  validationSchema: toTypedSchema(productSchema),
   initialValues: {
     name: "",
     category: "",

@@ -17,7 +17,7 @@
       </div>
 
       <p class="text-sm text-gray-600 mb-6">
-       Are you sure you want to delete this product? This action cannot be undone and will permanently remove the product from your inventory.
+        {{ $t('productDelete.message') }}
       </p>
 
       <div class="flex gap-3">
@@ -25,14 +25,16 @@
           class="flex-1 border border-[#BEDBFF] rounded-lg py-2 text-[#2563eb] font-semibold"
           @click="$emit('close')"
         >
-          Cancel
+          <!-- Cancel -->
+           {{ $t('productDelete.cancel') }}
         </button>
         <button
           class="flex-1 bg-red-600 text-white rounded-lg py-2 font-semibold"
           @click="confirm"
         >
           <UIcon name="i-heroicons-trash" class="inline w-4 h-4 mr-2" />
-          Delete Product
+          <!-- Delete Product -->
+          {{ $t('productDelete.deleteButton') }}
         </button>
       </div>
     </div>
